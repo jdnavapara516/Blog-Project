@@ -1,0 +1,25 @@
+{% extends "blogapp/base.html" %}
+
+{% load static %}
+
+
+{% block title %}Profile{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'blogapp/css/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<p>welcome {{username}}</p>
+
+{% for post in blogs %}
+   
+    title : {{ post.title }}
+    author : {{ post.author }}
+    category : {{ post.category }}
+    content : {{ post.content }}
+
+{% endfor %}
+
+{% endblock %}

@@ -1,3 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from .models import Post, Profile  # Import the Profile model
 
 # Create your views here.
+
+@login_required(login_url='login')
+def index(request):
+    username = request.user.username if request.user.is_authenticated else None
+    blogs = Post.objects.filter(published=True).order_by('-created_at')
+    print(f"Username: {username}")  # Debugging line to check username
+    return render(request, 'blogapp/index.html' , {
+        'blogs': blogs,
+        'username': username
+    }
+)
+
+
+def register(request):
+    if request.method == 'POST' : 
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # or any URL name
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+@login_required(login_url='login')
+def profile(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+        profile = Profile.objects.filter(user=request.user).first()
+        bio = profile.bio if profile else ''
+        profile_image = profile.profile_image.url if profile and profile.profile_image else None
+        return render(request, 'blogapp/profile.html', {'bio': bio, 'profile_image': profile_image, 'username': username})
+    else:
+        return redirect('login')  # Redirect to login if not authenticated

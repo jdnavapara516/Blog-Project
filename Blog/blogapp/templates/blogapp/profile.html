@@ -1,0 +1,7 @@
+{% load static %}
+
+{% if profile_image %}
+<img src="{{ profile_image }}" alt="Profile Image" class="profile-image" />
+{% else %}
+<img src="{% static 'blogapp/static/blogapp/images/default.png' %}" alt="Default Profile Image" class="profile-image" />
+{% endif %}
