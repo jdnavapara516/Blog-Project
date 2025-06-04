@@ -6,10 +6,14 @@ from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    profile_image = models.ImageField(upload_to='profiles/', blank=True, null=True)
+    profile_image = models.ImageField(upload_to='profiles/', blank=True, default='profiles/user.png')
 
     def __str__(self):
         return self.user.username
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
 
 # 2. Category
 class Category(models.Model):

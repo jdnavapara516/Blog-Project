@@ -2,24 +2,74 @@
 
 {% load static %}
 
-
-{% block title %}Profile{% endblock %}
+{% block title %}Home | My Blog{% endblock %}
 
 {% block extracss %}
-<link rel="stylesheet" href="{% static 'blogapp/css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'blogapp/css/index.css' %}">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+  rel="stylesheet"
+/>
 {% endblock %}
 
 {% block content %}
 
-<p>welcome {{username}}</p>
+      
 
-{% for post in blogs %}
-   
-    title : {{ post.title }}
-    author : {{ post.author }}
-    category : {{ post.category }}
-    content : {{ post.content }}
-
-{% endfor %}
-
+    
+    <main style="padding: 100px"
+      class="max-w-7xl mx-auto  py-10 grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12"
+    >
+      {% for post in blogs  %}
+      <a href="{% url 'blog' post.id %}">
+        <article class="flex flex-col card">
+        <div class="img-bg">
+          <img
+            alt="{{post.title}}"
+            src="{{post.image.url}}"
+            width="400"
+            height="260"
+          />
+        </div>
+        <p class="category">{{post.category}}</p>
+        <h2 class="title">
+          {{post.title|truncatewords:10 }}  by {{post.author.username}}
+        </h2>
+        
+        <p class="blog-text">
+          {{post.content|truncatewords:30 }}
+        </p>
+        <div
+          class="mt-4 flex space-x-6 meta-text font-normal border-b border-gray-200 pb-4 card-footer"
+        >
+          <span>{{post.created_at}}</span>
+          <span>5 Mins read</span>
+        </div>
+        <div
+          class="mt-4 flex items-center justify-between text-xs border-b border-gray-200 pb-4 social-icons card-footer"
+        >
+          <div class="likes">
+            <i class="fas fa-heart"></i>
+            <span>236</span>
+          </div>
+          <div class="flex space-x-6">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-pinterest-p"></i>
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+      </article>
+    </a>
+      {% endfor %}
+      
+    </main>
+  
+ 
 {% endblock %}

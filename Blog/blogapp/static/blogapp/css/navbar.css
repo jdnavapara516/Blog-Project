@@ -1,0 +1,12 @@
+/* User profile image in navbar */
+.profile img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(106, 130, 251, 0.12);
+    transition: box-shadow 0.2s, border-color 0.2s;
+    background: #f3f6fb;
+    display: block;
+}

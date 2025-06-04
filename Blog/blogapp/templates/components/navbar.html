@@ -1,0 +1,63 @@
+<header class="border-b border-gray-200 bg-white">
+  <nav
+    aria-label="Primary Navigation"
+    class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4"
+  >
+    <div class="flex items-center space-x-3" >
+      <div class="logo" style="width: 32px; height: 32px;">
+        <img style="height: 27px;
+    max-width: 100px;"
+        alt="Black eye logo with text Mockups For Free stacked vertically"
+        
+        height="32"
+        src="static/blogapp/images/logo.png"
+        width="32"
+      />
+    </div>
+    </div>
+    <ul class="hidden md:flex space-x-10 text-sm font-medium text-gray-600">
+      <li>
+        <a class="hover:text-gray-900" href="{% url "index" %}">Home</a>
+      </li>
+      <li>
+        <a class="hover:text-gray-900" href="#">News</a>
+      </li>
+      <li>
+        <a class="hover:text-gray-900" href="#">About</a>
+      </li>
+      <li>
+        <a
+          class="text-gray-900 border-b-2 border-cyan-500 pb-1 font-semibold"
+          href="#"
+          >Contect us</a
+        >
+      </li>
+    </ul>
+    {% if user.is_authenticated %}
+    <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+      <a
+        class="text-cyan-600 hover:text-cyan-700 transition duration-150"
+        href="{% url 'logout' %}"
+      >Logout</a>
+      <a
+        class="profile"
+        href="{% url 'profile' %}"
+      >{% if user_photo %}<img src="{{user_photo}}" alt=""></a>{% else %}<img src="media/profiles/user.png
+      " alt=""></a>{% endif %}
+    </div>
+  {% else %}
+    <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+      <a
+        class="text-cyan-600 hover:text-cyan-700 transition duration-150"
+        href="{% url 'signup' %}"
+      >Sign up</a>
+      <a
+        class="btn-gradient btn-gradient-hover text-white rounded-full px-5 py-2.5 transition duration-150"
+        href="{% url 'login' %}"
+      >Log in</a>
+    </div>
+  {% endif %}
+  
+   
+  </nav>
+</header>
