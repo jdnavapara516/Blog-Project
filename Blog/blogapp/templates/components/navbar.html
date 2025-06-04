@@ -1,3 +1,4 @@
+{% load static %}
 <header class="border-b border-gray-200 bg-white">
   <nav
     aria-label="Primary Navigation"
@@ -5,12 +6,12 @@
   >
     <div class="flex items-center space-x-3" >
       <div class="logo" style="width: 32px; height: 32px;">
-        <img style="height: 27px;
+<img style="height: 27px;
     max-width: 100px;"
         alt="Black eye logo with text Mockups For Free stacked vertically"
         
         height="32"
-        src="static/blogapp/images/logo.png"
+        src="{% static 'blogapp/images/logo.png' %}"
         width="32"
       />
     </div>
@@ -39,12 +40,12 @@
         class="text-cyan-600 hover:text-cyan-700 transition duration-150"
         href="{% url 'logout' %}"
       >Logout</a>
-      <a
+<a
         class="profile"
         href="{% url 'profile' %}"
-      >{% if user_photo %}<img src="{{user_photo}}" alt=""></a>{% else %}<img src="media/profiles/user.png
-      " alt=""></a>{% endif %}
-    </div>
+      >
+      {% if user_photo %}<img src="{{ user_photo.url }}" alt="">{% else %}<img src="{% static 'profiles/user.png' %}" alt=""></a>{% endif %}
+    </a> </div>
   {% else %}
     <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
       <a

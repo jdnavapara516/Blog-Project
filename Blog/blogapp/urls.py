@@ -10,4 +10,10 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('logout/', views.logout, name='logout'),
     path("blog/<int:post_id>/", views.blog, name='blog'),  # Assuming you have a post_detail view
+    path("new_comment/<int:post_id>/", views.new_comment, name='new_comment'),
+    path("/like/<int:post_id>/", views.like, name='like'),
+
+
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

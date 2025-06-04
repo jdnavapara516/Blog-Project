@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 from django.utils import timezone
 
 # 1. Profile to extend Django's User model
@@ -56,3 +57,4 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.user.username} liked {self.post.title}'
+

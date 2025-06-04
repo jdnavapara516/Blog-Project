@@ -34,14 +34,15 @@
      <span class="flex items-center space-x-2 bg-black bg-opacity-60 rounded-full px-3 py-1 text-xs sm:text-sm">
       <img alt="User icon" class="w-4 h-4" height="16" src="https://storage.googleapis.com/a1aa/image/79f95e6e-925a-4245-c4c0-503c3555f6cb.jpg" width="16"/>
       <span>
-       Revo Admin
+       {{ post.author.username }}
       </span>
      </span>
      <span class="bg-black bg-opacity-60 rounded-full px-3 py-1 text-xs sm:text-sm">
       3 Mins. Read
      </span>
+    
      <span class="bg-black bg-opacity-60 rounded-full px-3 py-1 text-xs sm:text-sm">
-      Artificial Intelligence
+      {{post.category.name}}
      </span>
     </div>
    </div>
@@ -53,15 +54,25 @@
         {{ post.content|safe }}
     </p>
     </section>
+    <div class="flex items-center space-x-2 mt-4">
+      <form method="post" action="{% url 'like' post.id %}">
+        {% csrf_token %}
+        <button type="submit" class="like-button flex items-center space-x-1 bg-purple-100 text-purple-800 px-3 py-1 rounded-full hover:bg-purple-200 transition text-sm sm:text-base">
+          <i class="fas fa-heart"></i>
+          <span>Like</span>
+        </button>
+      </form>
+      <span class="text-sm text-gray-700">{{ post.likes.count }} Likes</span>
+    </div>
     <!-- Author details section -->
     <section class="mt-12 border-t border-gray-300 pt-8 flex items-center space-x-6">
-     <img alt="Author portrait of a smiling person with short hair wearing a light blue shirt" class="w-20 h-20 rounded-full object-cover" height="80" src="{{post.author.image.url}}" width="80"/>
+     <img alt="Author portrait of a smiling person with short hair wearing a light blue shirt" class="w-20 h-20 rounded-full object-cover" height="80" src="{{author_photo.url}}" width="80"/>
      <div>
       <h3 class="font-semibold text-lg text-gray-900">
        {{ post.author.username }}
       </h3>
       <p class="text-gray-600 text-sm max-w-md">
-       {{ post.author.bio|default:"No bio available." }}
+       {{ post.author.profile.bio| truncatewords:50 }} 
       </p>
      </div>
     </section>
@@ -112,62 +123,33 @@
      <h3 class="font-semibold text-gray-900 mb-4 text-sm sm:text-base">
       Comments
      </h3>
-     <form class="mb-4 flex flex-col space-y-3">
-      <textarea aria-label="Add a comment" class="resize-none border border-gray-300 rounded-md p-2 text-gray-900 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Add a comment..." required="" rows="3"></textarea>
+     <form method="post" class="mb-4 flex flex-col space-y-3" action="{% url 'new_comment' post.id %}">
+      {% csrf_token %}
+      <textarea name="content" aria-label="Add a comment" class="resize-none border border-gray-300 rounded-md p-2 text-gray-900 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Add a comment..." required="" rows="3"></textarea>
       <button class="self-end bg-purple-600 text-white px-4 py-2 rounded-md text-sm sm:text-base hover:bg-purple-700 transition" type="submit">
        Post Comment
       </button>
      </form>
      <div class="space-y-4 max-h-64 overflow-y-auto">
-      <div class="flex space-x-3">
-       <img alt="User avatar of a person with short hair and glasses" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/d4283746-880d-4cd5-2bcd-1579560a4737.jpg" width="40"/>
-       <div>
-        <div class="flex items-center justify-between">
-         <p class="text-gray-900 font-semibold text-sm sm:text-base">
-          Jane Doe
-         </p>
-         <time class="bg-purple-100 text-purple-700 text-xs sm:text-sm px-2 py-0.5 rounded-full font-medium select-none" datetime="2024-04-20">
-          Apr 20, 2024
-         </time>
-        </div>
-        <p class="text-gray-700 text-xs sm:text-sm mt-1">
-         This article really helped me understand agentic AI better. Thanks for sharing!
-        </p>
-       </div>
-      </div>
-      <div class="flex space-x-3">
-       <img alt="User avatar of a person with long hair smiling" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/dfe7e165-8ae6-4c91-b065-a36263bfc845.jpg" width="40"/>
-       <div>
-        <div class="flex items-center justify-between">
-         <p class="text-gray-900 font-semibold text-sm sm:text-base">
-          Alex Smith
-         </p>
-         <time class="bg-purple-100 text-purple-700 text-xs sm:text-sm px-2 py-0.5 rounded-full font-medium select-none" datetime="2024-04-18">
-          Apr 18, 2024
-         </time>
-        </div>
-        <p class="text-gray-700 text-xs sm:text-sm mt-1">
-         Looking forward to more posts like this on AI advancements.
-        </p>
-       </div>
-      </div>
-      <div class="flex space-x-3">
-       <img alt="User avatar of a person with curly hair" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/3a67efc3-8e78-4264-e104-a2de2eeb580f.jpg" width="40"/>
-       <div>
-        <div class="flex items-center justify-between">
-         <p class="text-gray-900 font-semibold text-sm sm:text-base">
-          Michael Lee
-         </p>
-         <time class="bg-purple-100 text-purple-700 text-xs sm:text-sm px-2 py-0.5 rounded-full font-medium select-none" datetime="2024-04-15">
-          Apr 15, 2024
-         </time>
-        </div>
-        <p class="text-gray-700 text-xs sm:text-sm mt-1">
-         Great insights! Agentic AI seems like the future of autonomous systems.
-        </p>
-       </div>
-      </div>
-     </div>
+      {% for comment, photo in comment_data %}
+<div class="flex space-x-3">
+  <img alt="User avatar" class="w-10 h-10 rounded-full object-cover" height="40" src="{{ photo.url }}" width="40"/>
+  <div>
+    <div class="flex items-center justify-between">
+      <p class="text-gray-900 font-semibold text-sm sm:text-base">
+        {{ comment.user.username }}
+      </p>
+      <time class="">
+        {{ comment.created_at|date:"M d, Y" }}
+      </time>
+    </div>
+    <p class="text-gray-700 text-xs sm:text-sm mt-1">
+      {{ comment.content }}
+    </p>
+  </div>
+</div>
+{% endfor %}
+
     </section>
    </aside>
 {% endblock %}
