@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+
+from blogapp.forms import CustomUserCreationForm
 from .models import Post, Profile  # Import the Profile model
 
 # Create your views here.
@@ -20,12 +22,12 @@ def index(request):
 
 def register(request):
     if request.method == 'POST' : 
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')  # or any URL name
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 @login_required(login_url='login')

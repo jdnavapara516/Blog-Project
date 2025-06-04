@@ -56,6 +56,7 @@ TEMPLATES = [
     {   'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / "templates"],  # <== this is important
         'APP_DIRS': True,
+      
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -129,3 +130,10 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Project-level static folder
+]
