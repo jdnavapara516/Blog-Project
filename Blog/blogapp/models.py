@@ -7,6 +7,10 @@ from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=15, blank=True)
+    insta_link = models.URLField(blank=True)
+    proffesion = models.CharField(max_length=100, blank=True)
     profile_image = models.ImageField(upload_to='profiles/', blank=True, default='profiles/user.png')
 
     def __str__(self):

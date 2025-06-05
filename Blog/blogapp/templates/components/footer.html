@@ -1,22 +1,17 @@
-<footer class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-8 mt-16 shadow-inner">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="text-lg font-bold tracking-wide">
-        My Blog &copy; {{ now|date:"Y" }}
-      </div>
-      {% comment %} <nav class="flex gap-6 text-sm font-medium">
-        <a href="{% url 'index' %}" class="hover:underline hover:text-indigo-200 transition">Home</a>
-        <a href="{% url 'myblog' %}" class="hover:underline hover:text-indigo-200 transition">My Blog</a>
-        <a href="{% url 'createblog' %}" class="hover:underline hover:text-indigo-200 transition">Create</a>
-        <a href="#" class="hover:underline hover:text-indigo-200 transition">Contact</a>
-      </nav> {% endcomment %}
-      <div class="flex gap-4">
-        <a href="#" aria-label="Facebook" class="hover:text-indigo-200 transition"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram" class="hover:text-indigo-200 transition"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="LinkedIn" class="hover:text-indigo-200 transition"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" aria-label="YouTube" class="hover:text-indigo-200 transition"><i class="fab fa-youtube"></i></a>
-      </div>
+<footer role="contentinfo" aria-label="Site footer">
+  <div class="footer-content">
+    <div class="footer-logo" aria-label="MyBlog logo">MyBlog</div>
+    <nav aria-label="Footer navigation" class="footer-links">
+     
+    </nav>
+    <div class="social-icons" aria-label="Social media links">
+      <a href="#" aria-label="Facebook" tabindex="0"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter" tabindex="0"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Instagram" tabindex="0"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn" tabindex="0"><i class="fab fa-linkedin-in"></i></a>
     </div>
-    {% comment %} <div class="mt-6 text-center text-xs text-indigo-100">
-      Made with <span class="text-pink-200">&hearts;</span> by Your Name
-    </div> {% endcomment %}
-  </footer>
+  </div>
+  <div class="copyright" aria-label="Copyright notice">
+    &copy; 2024 MyBlog. All rights reserved.
+  </div>
+</footer>
