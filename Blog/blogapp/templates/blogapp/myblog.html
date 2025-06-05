@@ -1,0 +1,267 @@
+{% extends "blogapp/base.html" %} {% load static %} {% block title %}
+My Blog
+{%endblock %} 
+{% block extracss %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  body {
+    background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%);
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    margin: 0;
+  }
+  .blog-card {
+    background: rgba(255 255 255 / 0.15);
+    border: 2px solid rgba(255 255 255 / 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgb(252 92 125 / 0.3);
+    color: white;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-card:hover {
+    box-shadow: 0 8px 30px rgb(252 92 125 / 0.7);
+    border-color: white;
+  }
+  .blog-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 2px solid rgba(255 255 255 / 0.3);
+  }
+  .blog-content {
+    padding: 1.25rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.5);
+  }
+  .blog-category {
+    font-weight: 600;
+    font-size: 0.875rem;
+    background: rgba(252, 92, 125, 0.8);
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    width: fit-content;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  }
+  .blog-excerpt {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: rgba(255 255 255 / 0.9);
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  }
+  .blog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255 255 255 / 0.8);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+    margin-bottom: 0.75rem;
+  }
+  .blog-footer i {
+    margin-right: 0.3rem;
+    color: #fc5c7d;
+  }
+  .blog-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgb(252 92 125 / 0.5);
+    border: 2px solid rgba(255 255 255 / 0.4);
+    color: white;
+    background: rgba(255 255 255 / 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .btn:hover,
+  .btn:focus {
+    background: rgba(255 255 255 / 0.35);
+    box-shadow: 0 6px 20px rgb(252 92 125 / 0.8);
+    outline: none;
+  }
+  .btn-update {
+    border-color: #6a82fb;
+    background: rgba(106, 130, 251, 0.3);
+  }
+  .btn-update:hover,
+  .btn-update:focus {
+    background: rgba(106, 130, 251, 0.6);
+    box-shadow: 0 6px 20px rgba(106, 130, 251, 0.8);
+  }
+  .btn-delete {
+    border-color: #fc5c7d;
+    background: rgba(252, 92, 125, 0.3);
+  }
+  .btn-delete:hover,
+  .btn-delete:focus {
+    background: rgba(252, 92, 125, 0.6);
+    box-shadow: 0 6px 20px rgba(252, 92, 125, 0.8);
+  }
+  .btn-view {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.3);
+  }
+  .btn-view:hover,
+  .btn-view:focus {
+    background: rgba(74, 222, 128, 0.6);
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.8);
+  }
+  .btn-like {
+    border-color: #facc15;
+    background: rgba(250, 204, 21, 0.3);
+    color: #facc15;
+    font-weight: 700;
+  }
+  .btn-like:hover,
+  .btn-like:focus {
+    background: rgba(250, 204, 21, 0.6);
+    box-shadow: 0 6px 20px rgba(250, 204, 21, 0.8);
+    color: #b45309;
+  }
+  .btn-like i {
+    margin-left: 0.3rem;
+    transition: color 0.3s ease;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(252, 92, 125, 0.6);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+</style>
+{% endblock %} {% block content %}
+<main class="flex-grow max-w-7xl mx-auto px-6 pt-24 pb-12 w-full">
+  <h1
+    class="text-5xl font-extrabold mb-12 text-center text-white drop-shadow-lg tracking-wide select-none"
+  >
+    My Blog
+  </h1>
+  <div class="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {% for post in posts %}
+    <article class="blog-card">
+      <img
+        alt="{{ post.title }}"
+        class="blog-image"
+        src="{{ post.image.url }}"
+      />
+      <div class="blog-content">
+        <div class="blog-category">{{ post.category.name }}</div>
+        <h2 class="blog-title">{{ post.title }}</h2>
+        <p class="blog-excerpt">{{ post.content|truncatewords:20 }}</p>
+        <div class="blog-footer">
+          <span
+            ><i class="fas fa-calendar-alt"></i> {{ post.created_at}}</span
+          >
+          <span><i class="fas fa-user"></i> {{ post.author.username }}</span>
+        </div>
+        <div class="blog-actions">
+          <a
+            class="btn btn-update"
+            href="{% url 'updateblog' post.id %}"
+            aria-label="Update blog post {{ post.title }}"
+          >
+            <i class="fas fa-edit"></i> Update
+          </a>
+          <a
+            class="btn btn-delete"
+            {% comment %} href="{% url 'delete_blog' post.id %}" {% endcomment %}
+            aria-label="Delete blog post {{ post.title }}"
+          >
+            <i class="fas fa-trash-alt"></i> Delete
+          </a>
+          {% comment %} <a
+            class="btn btn-view"
+            href="{% url 'blog' post.id %}"
+            aria-label="View blog post {{ post.title }}"
+          >
+             <i class="fas fa-eye"></i> View 
+          </a> {% endcomment %}
+          <button
+            class="btn btn-like"
+            type="button"
+            aria-label="Like blog post {{ post.title }}"
+          >
+            Like <i class="fas fa-heart"></i>
+            <span class="like-count">{{ post.likes.count|default:0 }}</span>
+          </button>
+        </div>
+      </div>
+    </article>
+    {% empty %}
+    <div class="col-span-3 text-center text-white text-lg font-semibold py-20">
+      No blogs found.
+    </div>
+    {% endfor %}
+  </div>
+</main>
+<script>
+  // Mobile menu toggle
+  const menuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  }
+
+  // Like button functionality
+  document.querySelectorAll(".btn-like").forEach((button) => {
+    button.addEventListener("click", () => {
+      const likeCountSpan = button.querySelector(".like-count");
+      let count = parseInt(likeCountSpan.textContent, 10);
+      const liked = button.classList.toggle("liked");
+      if (liked) {
+        count++;
+        button.querySelector("i.fas.fa-heart").style.color = "#b45309";
+      } else {
+        count--;
+        button.querySelector("i.fas.fa-heart").style.color = "";
+      }
+      likeCountSpan.textContent = count;
+    });
+  });
+</script>
+{% endblock %}

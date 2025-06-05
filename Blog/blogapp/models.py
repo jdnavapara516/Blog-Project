@@ -58,3 +58,13 @@ class Like(models.Model):
     def __str__(self):
         return f'{self.user.username} liked {self.post.title}'
 
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Contact from {self.name} - {self.email}'

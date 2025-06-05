@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as django_logout
 from blogapp.forms import CustomUserCreationForm
-from .models import Post, Profile, Comment  # Import the Post, Profile, and Comment models
+from .models import Category, Contact, Like, Post, Profile, Comment  # Import the Post, Profile, and Comment models
 
 # Create your views here.
 
@@ -21,12 +21,15 @@ def index(request):
     blogs = Post.objects.filter(published=True).order_by('-created_at')
     print(f"Username: {username}")  # Debugging line to check username
     user_photo = get_user_profile_photo(request.user) 
-
+    like = Like.objects.filter(user=request.user) if request.user.is_authenticated else None
+    
+    
     print(f"User Photo: {user_photo}")  # Debugging line to check user photo
     return render(request, 'blogapp/index.html' , {
         'blogs': blogs,
         'username': username,
-        'user_photo': user_photo
+        'user_photo': user_photo,
+        
     }
 )
 
@@ -107,3 +110,74 @@ def like(request, post_id):
             like.delete()  # If the like already exists, remove it
         return redirect('blog', post_id=post.id)  # Redirect to the blog post page after liking/unliking
     return redirect('login')  # Redirect to login if user is not authenticated
+
+
+@login_required(login_url='login')
+def myblog(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+        user_photo = get_user_profile_photo(request.user)
+        posts = Post.objects.filter(author=request.user).order_by('-created_at')
+        return render(request, 'blogapp/myblog.html', {'posts': posts, 'username': username, 'user_photo': user_photo})
+    
+@login_required(login_url='login')
+def contact(request):
+    user_phhoto = get_user_profile_photo(request.user) if request.user.is_authenticated else None
+    if request.method == 'POST':
+        # Handle contact form submission
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        new_mgs = Contact(name=name, email=email, message=message)
+        new_mgs.save()  # Save the contact message to the database
+       
+        # Here you can add logic to save the contact message or send an email
+        print(f"Contact Form Submitted: {name}, {email}, {message}")
+        return redirect('index')
+    else:
+        # Render the contact form
+        return render(request, 'blogapp/contact.html', {'user_photo': user_phhoto})
+    
+@login_required(login_url='login')
+def createblog(request):
+    user_photo = get_user_profile_photo(request.user) if request.user.is_authenticated else None
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        image = request.FILES.get('image')
+        category_id = request.POST.get('category')
+        category = Category.objects.get(id=category_id) if category_id else None
+        post = Post.objects.create(
+            title=title,
+            author=request.user,
+            content=content,
+            image=image,
+            category=category
+        )
+        post.save()
+        return redirect('myblog')  # Redirect to the user's blog page after creating a new post
+    else:
+        categories = Category.objects.all()
+        return render(request, 'blogapp/createblog.html', {'categories': categories, 'user_photo': user_photo})
+    
+
+@login_required(login_url='login')
+def updateblog(request, post_id):
+    post = Post.objects.get(id=post_id)
+    user_photo = get_user_profile_photo(request.user) if request.user.is_authenticated else None
+    if request.method == 'POST':
+        Post.objects.filter(id=post_id).update(
+            title=request.POST.get('title'),
+            content=request.POST.get('content'),
+            image=request.FILES.get('image', post.image),  # Use existing image if no new one is uploaded
+            category=Category.objects.get(id=request.POST.get('category')) if request.POST.get('category') else None
+        )
+        return redirect('myblog')
+    else:
+        categories = Category.objects.all()
+        return render(request, 'blogapp/updateblog.html', {
+            'post': post,
+            'categories': categories,
+            'user_photo': user_photo
+        })

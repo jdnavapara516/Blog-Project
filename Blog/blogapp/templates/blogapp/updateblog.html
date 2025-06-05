@@ -1,0 +1,223 @@
+{% comment %} {% extends "blogapp/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block extracss %}
+  
+{% endblock %}
+
+{% block content %}
+ 
+{% endblock %} {% endcomment %}
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Update Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%);
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+    }
+    label {
+      text-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+    }
+    input[type="text"],
+    textarea,
+    select {
+      background: rgba(255 255 255 / 0.15);
+      border: 2px solid rgba(255 255 255 / 0.3);
+      color: white;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgb(252 92 125 / 0.3);
+    }
+    input[type="text"]::placeholder,
+    textarea::placeholder,
+    select {
+      color: rgba(255 255 255 / 0.7);
+      font-weight: 500;
+    }
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+      background: rgba(255 255 255 / 0.3);
+      border-color: #fff;
+      outline: none;
+      box-shadow: 0 0 10px 3px rgba(252, 92, 125, 0.7);
+      color: #fff;
+    }
+    input[type="file"] {
+      color: white;
+      font-weight: 600;
+    }
+    input[type="file"]::-webkit-file-upload-button {
+      background: #fc5c7d;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.75rem;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 15px rgb(252 92 125 / 0.5);
+    }
+    input[type="file"]::-webkit-file-upload-button:hover {
+      background: #e04363;
+    }
+    input[type="file"]::-moz-file-upload-button {
+      background: #fc5c7d;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.75rem;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 15px rgb(252 92 125 / 0.5);
+    }
+    input[type="file"]::-moz-file-upload-button:hover {
+      background: #e04363;
+    }
+    button[type="submit"] {
+      background: rgba(255 255 255 / 0.25);
+      color: white;
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding: 0.75rem 0;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgb(252 92 125 / 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(255 255 255 / 0.4);
+      letter-spacing: 0.05em;
+      width: 100%;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background: rgba(255 255 255 / 0.45);
+      box-shadow: 0 12px 30px rgb(252 92 125 / 0.9);
+      outline: none;
+    }
+    nav a {
+      text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <nav class="w-full bg-white/20 backdrop-blur-md fixed top-0 left-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
+      <a href="#" class="text-white font-extrabold text-2xl tracking-wide drop-shadow-lg select-none">MyBlog</a>
+      <ul class="hidden md:flex space-x-8 text-white font-semibold text-lg">
+        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">Home</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">Blog</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">About</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">Contact</a></li>
+      </ul>
+      <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden bg-white/10 backdrop-blur-md px-6 pb-4 hidden">
+      <ul class="flex flex-col space-y-4 text-white font-semibold text-lg pt-2">
+        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">Home</a></li>
+        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">Blog</a></li>
+        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">About</a></li>
+        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="flex-grow flex items-center justify-center px-6 pt-24 pb-12">
+    <section class="w-full max-w-3xl">
+      <h1 class="text-5xl font-extrabold mb-10 text-center text-white drop-shadow-lg tracking-wide select-none">
+        Update Blog
+      </h1>
+      <form class="space-y-8" novalidate>
+        <div>
+          <label for="title" class="block mb-3 text-white text-lg font-semibold select-none">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter blog title"
+            required
+            autocomplete="off"
+            spellcheck="false"
+            class="w-full rounded-xl px-5 py-4 bg-[rgba(255,255,255,0.15)] border-2 border-[rgba(255,255,255,0.3)] text-white font-semibold text-base shadow-[0_4px_15px_rgba(252,92,125,0.3)] placeholder-white/70 focus:bg-[rgba(255,255,255,0.3)] focus:border-white focus:outline-none focus:shadow-[0_0_10px_3px_rgba(252,92,125,0.7)]"
+          />
+        </div>
+        <div>
+          <label for="content" class="block mb-3 text-white text-lg font-semibold select-none">Content</label>
+          <textarea
+            id="content"
+            name="content"
+            rows="7"
+            placeholder="Write your blog content here..."
+            required
+            spellcheck="true"
+            class="w-full rounded-xl px-5 py-4 resize-y bg-[rgba(255,255,255,0.15)] border-2 border-[rgba(255,255,255,0.3)] text-white font-semibold text-base shadow-[0_4px_15px_rgba(252,92,125,0.3)] placeholder-white/70 focus:bg-[rgba(255,255,255,0.3)] focus:border-white focus:outline-none focus:shadow-[0_0_10px_3px_rgba(252,92,125,0.7)]"
+          ></textarea>
+        </div>
+        <div>
+          <label for="category" class="block mb-3 text-white text-lg font-semibold select-none">Category</label>
+          <select
+            id="category"
+            name="category"
+            required
+            class="w-full rounded-xl px-5 py-4 bg-[rgba(255,255,255,0.15)] border-2 border-[rgba(255,255,255,0.3)] text-white font-semibold text-base shadow-[0_4px_15px_rgba(252,92,125,0.3)] placeholder-white/70 focus:bg-[rgba(255,255,255,0.3)] focus:border-white focus:outline-none focus:shadow-[0_0_10px_3px_rgba(252,92,125,0.7)] appearance-none"
+          >
+            <option value="" disabled selected>Select a category</option>
+            <option value="technology">Technology</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="health">Health</option>
+            <option value="travel">Travel</option>
+            <option value="education">Education</option>
+            <option value="food">Food</option>
+            <option value="business">Business</option>
+            <option value="entertainment">Entertainment</option>
+          </select>
+        </div>
+        <div>
+          <label for="photo" class="block mb-3 text-white text-lg font-semibold select-none">Photo</label>
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            required
+            class="w-full rounded-xl cursor-pointer text-white font-semibold"
+          />
+        </div>
+        <button type="submit" class="w-full bg-[rgba(255,255,255,0.25)] text-white font-bold text-lg py-3 rounded-3xl shadow-[0_8px_20px_rgba(252,92,125,0.6)] border-2 border-[rgba(255,255,255,0.4)] tracking-widest transition duration-300 hover:bg-[rgba(255,255,255,0.45)] hover:shadow-[0_12px_30px_rgba(252,92,125,0.9)] focus:outline-none">
+          Update Blog
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

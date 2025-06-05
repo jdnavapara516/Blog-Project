@@ -1,0 +1,115 @@
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.createblog-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.createblog-container {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+  padding: 2.5rem 2rem;
+  max-width: 430px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.createblog-title {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.createblog-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #6a82fb;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+}
+
+.createblog-form input[type="text"],
+.createblog-form input[type="file"],
+.createblog-form select,
+.createblog-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 0.7rem;
+  background: #f7f9fa;
+  font-size: 1rem;
+  transition: border 0.2s;
+  color: #333;
+}
+
+.createblog-form input[type="text"]:focus,
+.createblog-form input[type="file"]:focus,
+.createblog-form select:focus,
+.createblog-form textarea:focus {
+  border: 1.5px solid #6a82fb;
+  outline: none;
+  background: #fff;
+}
+
+.createblog-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+  transform: translateY(-2px) scale(1.02);
+}
+
+@media (max-width: 600px) {
+  .createblog-container {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    max-width: 98vw;
+  }
+  .createblog-title {
+    font-size: 1.3rem;
+  }
+}

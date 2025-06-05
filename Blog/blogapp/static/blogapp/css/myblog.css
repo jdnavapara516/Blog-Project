@@ -1,0 +1,146 @@
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.myblog-main {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2.5rem 0;
+}
+
+.myblog-cards {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .myblog-cards {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.myblog-card {
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(8px);
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+  padding: 2.2rem 1.8rem; /* Increased padding */
+  display: flex;
+  flex-direction: column;
+  max-width: 370px;
+  width: 100%;
+  min-height: 430px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.myblog-card:hover {
+  box-shadow: 0 16px 40px rgba(44, 62, 80, 0.18);
+  transform: translateY(-4px) scale(1.01);
+}
+
+.myblog-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 1rem;
+  margin-bottom: 1.2rem;
+  background: #eee;
+  transition: filter 0.2s;
+}
+
+.myblog-category {
+  font-size: 0.7rem;
+  color: #6a82fb;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.myblog-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
+
+.myblog-desc {
+  font-size: 0.97rem;
+  color: #444;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.myblog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.myblog-btns {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.myblog-btn {
+  background: #6a82fb;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.45rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(106, 130, 251, 0.1);
+}
+
+.myblog-btn:hover {
+  background: #fc5c7d;
+  color: #fff;
+}
+
+.myblog-btn-view {
+  background: #444;
+  color: #fff;
+}
+
+.myblog-btn-view:hover {
+  background: #6a82fb;
+}
+
+.myblog-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #fc5c7d;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.myblog-likes i {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .myblog-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .myblog-card {
+    max-width: 98vw;
+  }
+}
