@@ -1,25 +1,13 @@
-{% comment %} {% extends "blogapp/base.html" %}
+ {% extends "blogapp/base.html" %}
 
 {% load static %}
 
 {% block title %}
-    
+    Update Blog
 {% endblock %}
 
 {% block extracss %}
   
-{% endblock %}
-
-{% block content %}
- 
-{% endblock %} {% endcomment %}
-
-
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Update Blog</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     rel="stylesheet"
@@ -118,31 +106,14 @@
       text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
     }
   </style>
-</head>
-<body class="flex flex-col min-h-screen">
-  <nav class="w-full bg-white/20 backdrop-blur-md fixed top-0 left-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
-      <a href="#" class="text-white font-extrabold text-2xl tracking-wide drop-shadow-lg select-none">MyBlog</a>
-      <ul class="hidden md:flex space-x-8 text-white font-semibold text-lg">
-        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">Home</a></li>
-        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">Blog</a></li>
-        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">About</a></li>
-        <li><a href="#" class="hover:text-pink-300 transition-colors duration-300">Contact</a></li>
-      </ul>
-      <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-        <i class="fas fa-bars fa-lg"></i>
-      </button>
-    </div>
-    <div id="mobile-menu" class="md:hidden bg-white/10 backdrop-blur-md px-6 pb-4 hidden">
-      <ul class="flex flex-col space-y-4 text-white font-semibold text-lg pt-2">
-        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">Home</a></li>
-        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">Blog</a></li>
-        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">About</a></li>
-        <li><a href="#" class="block hover:text-pink-300 transition-colors duration-300">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
 
+{% endblock %}
+
+{% block content %}
+ 
+
+<div class="flex flex-col min-h-screen">
+  
   <main class="flex-grow flex items-center justify-center px-6 pt-24 pb-12">
     <section class="w-full max-w-3xl">
       <h1 class="text-5xl font-extrabold mb-10 text-center text-white drop-shadow-lg tracking-wide select-none">
@@ -210,14 +181,6 @@
       </form>
     </section>
   </main>
+</div>
 
-  <script>
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    menuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
-</body>
-</html>
+{% endblock %}

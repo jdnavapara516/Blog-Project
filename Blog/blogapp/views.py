@@ -55,12 +55,12 @@ def profile(request):
         username = request.user.username
         profile = Profile.objects.filter(user=request.user).first()
         bio = profile.bio if profile else ''
-        instal_ink = profile.insta_link if profile else ''
+        insta_ink = profile.insta_link if profile else ''
         address = profile.address if profile else ''
         proffesion = profile.proffesion if profile else ''
-
+        email = request.user.email if request.user.is_authenticated else ''
         profile_image = get_user_profile_photo(request.user)  # Get user's profile photo
-        return render(request, 'blogapp/profile.html', {'bio': bio, 'user_photo': profile_image, 'username': username, 'instal_ink': instal_ink, 'address': address, 'proffesion': proffesion})
+        return render(request, 'blogapp/profile.html', {'bio': bio, 'user_photo': profile_image, 'username': username, 'insta_link': insta_ink, 'address': address, 'proffesion': proffesion, 'email': email})
     else:
         return redirect('login')  # Redirect to login if not authenticated
 

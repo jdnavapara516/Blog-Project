@@ -219,14 +219,14 @@ My Blog
           >
              <i class="fas fa-eye"></i> View 
           </a> {% endcomment %}
-          <button
+          <a
             class="btn btn-like"
+            href="{% url 'blog' post.id %}"
             type="button"
-            aria-label="Like blog post {{ post.title }}"
+            aria-label="View blog post {{ post.title }}"
           >
-            Like <i class="fas fa-heart"></i>
-            <span class="like-count">{{ post.likes.count|default:0 }}</span>
-          </button>
+            View <i class="fas fa-eye"></i>
+          </a>
         </div>
       </div>
     </article>
